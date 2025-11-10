@@ -19,13 +19,32 @@ public class ARPlaceOnPlane : MonoBehaviour
         }
     }
 
-    void UpdateCursor() //회면 증앙의 좌표를 가져와 해당 위치에서 평면 탐지
+    /*void UpdateCursor() //회면 증앙의 좌표를 가져와 해당 위치에서 평면 탐지
     {
         Vector2 screenPosition = Camera.main.ViewportToScreenPoint(new Vector2(0.5f, 0.5f));
         List<ARRaycastHit> hits = new List<ARRaycastHit>();
         aRRaycastManager.Raycast(screenPosition, hits, UnityEngine.XR.ARSubsystems.TrackableType.Planes);    //평면을 탐지
 
         if (hits.Count > 0 )
+        {
+            transform.position = hits[0].pose.position;
+            transform.rotation = hits[0].pose.rotation;
+
+        }
+    }*/
+
+
+    void UpdateCursor() //회면 증앙의 좌표를 가져와 해당 위치에서 평면 탐지
+    {
+        List<ARRaycastHit> hits = new List<ARRaycastHit>();
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        //Camera.main.ScreenToViewportPoint(Input.GetTouch(0).position);
+
+        aRRaycastManager.Raycast(ray, hits, UnityEngine.XR.ARSubsystems.TrackableType.Planes);    //평면을 탐지
+
+        if (hits.Count > 0)
         {
             transform.position = hits[0].pose.position;
             transform.rotation = hits[0].pose.rotation;
