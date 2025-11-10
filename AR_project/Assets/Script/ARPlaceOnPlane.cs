@@ -23,8 +23,8 @@ public class ARPlaceOnPlane : MonoBehaviour
     {
         Vector2 screenPosition = Camera.main.ViewportToScreenPoint(new Vector2(0.5f, 0.5f));
         List<ARRaycastHit> hits = new List<ARRaycastHit>();
-
         aRRaycastManager.Raycast(screenPosition, hits, UnityEngine.XR.ARSubsystems.TrackableType.Planes);    //Æò¸éÀ» Å½Áö
+
         if (hits.Count > 0 )
         {
             transform.position = hits[0].pose.position;
